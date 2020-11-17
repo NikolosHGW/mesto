@@ -1,0 +1,6 @@
+.profile__job {
+  margin: 0;
+  padding: 0;
+  grid-area: job;
+  font-weight: 400;
+}

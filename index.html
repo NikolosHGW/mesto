@@ -9,12 +9,24 @@
 <body class="body">
   <div class="page">
     <header class="header page__header">
-      <img class="header__logo" src="./images/Vector.svg">
+      <img class="header__logo" src="./images/Vector.svg" alt="логотип Место Россия">
       <div class="header__line"></div>
     </header>
 
     <main class="content">
-      <section class="profile"></section>
+      <section class="profile content__profile">
+        <div class="profile__container">
+          <img class="profile__avatar" src="./images/image.jpg" alt="Аватар">
+          <div class="profile__info">
+            <h1 class="profile__name">Фото Фотограф</h1>
+            <p class="profile__job">Фотографирователь</p>
+            <button class="profile__edit-button">
+              <img src="./images/edbutton.svg" alt="Кнопка редактировать">
+            </button>
+          </div>
+        </div>
+        <button class="profile__add-button"><img src="./images/button.svg" alt="Кнопка добавить"></button>
+      </section>
 
       <section class="elements"></section>
     </main>
