@@ -3,4 +3,6 @@
   max-width: 880px;
   display: inline-block;
   font-size: 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(84,84,84, .7);
 }

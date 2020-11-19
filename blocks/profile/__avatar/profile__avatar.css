@@ -2,3 +2,9 @@
   border-radius: 60px;
   margin-right: 30px;
 }
+
+@media screen and (max-width: 700px) {
+  .profile__avatar {
+    margin: 0 0 26px;
+  }
+}
