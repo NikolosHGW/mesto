@@ -2,5 +2,19 @@
   background-color: #000000;
   border: 0;
   padding: 0;
+  width: 150px;
   height: 50px;
+  box-sizing: border-box;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+}
+
+@media screen and (max-width: 880px) {
+  .profile__add-button {
+    max-width: 282px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
