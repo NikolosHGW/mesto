@@ -11,6 +11,12 @@
   font-size: 18px;
   line-height: 1.22;
   border-radius: 2px;
+  outline: 0;
+  transition: background-color .4s linear;
+}
+
+.popup__save-button:hover {
+  background-color: rgba(0, 0, 0, .8);
 }
 
 @media screen and (max-width: 520px) {

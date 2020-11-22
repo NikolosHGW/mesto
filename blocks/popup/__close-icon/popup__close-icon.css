@@ -4,6 +4,11 @@
   height: 40px;
   top: -40px;
   right: -40px;
+  transition: opacity .4s linear;
+}
+
+.popup__close-icon:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width: 380px) {

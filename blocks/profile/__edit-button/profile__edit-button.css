@@ -5,6 +5,12 @@
   border: 0;
   grid-area: edbut;
   align-self: center;
+  outline: 0;
+  transition: opacity .4s linear;
+}
+
+.profile__edit-button:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width: 880px) {

@@ -2,4 +2,10 @@
   align-self: center;
   width: 20.76px;
   height: 18.13px;
+  transition: opacity .4s linear;
 }
+
+.element__like-button:hover {
+  opacity: .5;
+}
+
