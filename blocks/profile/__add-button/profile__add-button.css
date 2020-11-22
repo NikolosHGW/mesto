@@ -1,6 +1,9 @@
 .profile__add-button {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 22 22'%3E%3Cdefs/%3E%3Cpath fill='%23fff' d='M22 9.778h-9.778V0H9.778v9.778H0v2.444h9.778V22h2.444v-9.778H22V9.778z'/%3E%3C/svg%3E");
   background-color: #000000;
-  border: 0;
+  background-size: 22px 22px;
+  background-repeat: no-repeat;
+  background-position: center;
   padding: 0;
   width: 150px;
   height: 50px;
