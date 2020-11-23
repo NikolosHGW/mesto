@@ -3,6 +3,10 @@
   padding: 0;
   grid-area: job;
   font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 492px;
 }
 
 @media screen and (max-width: 880px) {
@@ -10,5 +14,6 @@
     font-size: 14px;
     line-height: 1.21;
     margin-top: 7px;
+    max-width: 230px;
   }
 }
