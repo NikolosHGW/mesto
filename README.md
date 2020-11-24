@@ -8,4 +8,4 @@ Developed an interactive single-page website where we can add photos, delete the
 * CSS
 * Figma
 
-[Interactive website](https://nikoloshgw.github.io/russian-travel/)
+[Interactive website Mesto](https://nikoloshgw.github.io/russian-travel/)
