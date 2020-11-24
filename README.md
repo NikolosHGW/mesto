@@ -1,17 +1,11 @@
-# Проект 4: Место
+# Basic JavaScript
 
-### Обзор
+Developed an interactive single-page website where we can add photos, delete them, and put likes.
 
+### Technologies
+* JavaScript
+* HTML
+* CSS
 * Figma
-* Картинки
 
-**Figma**
-
-* [Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
-
-**Картинки**
-
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!
+[Interactive website](https://nikoloshgw.github.io/russian-travel/)
