@@ -1,5 +1,5 @@
 .element__like-button {
-  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 21 19"%3E%3Cdefs/%3E%3Cpath fill="%23000" d="M19.154 9.338c2.14-2.14 2.14-5.614 0-7.733a5.486 5.486 0 00-7.755 0l-1.038 1.06-1.038-1.039C7.183-.535 3.708-.535 1.589 1.605.551 2.643 0 4.02 0 5.482s.572 2.84 1.59 3.877l8.771 8.772 8.793-8.793zM1.356 5.482a3.97 3.97 0 011.208-2.881c.805-.805 1.843-1.208 2.881-1.208s2.077.403 2.882 1.208l2.034 2.013 2.034-2.034c1.59-1.59 4.195-1.59 5.763 0 .763.762 1.208 1.78 1.208 2.881s-.424 2.119-1.208 2.881l-7.797 7.818-7.797-7.796C1.8 7.58 1.356 6.563 1.356 5.482z"/%3E%3C/svg%3E');
+  background-image: url("../../../images/like.svg");
   align-self: center;
   background-size: 20.76px 18.13px;
   width: 20.76px;
@@ -17,6 +17,6 @@
 }
 
 .element__like-button:focus {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 18'%3E%3Cdefs/%3E%3Cpath fill='%23000' fill-rule='evenodd' d='M18.454 1.593c2.061 2.104 2.061 5.553 0 7.678L9.982 18 1.531 9.292A5.566 5.566 0 010 5.442c0-1.45.53-2.818 1.531-3.849 2.041-2.124 5.39-2.124 7.45.021l1.001 1.031 1-1.052a5.176 5.176 0 017.472 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
+  background-image: url("../../../images/likeFill.svg");
   background-size: 20.76px 18.13px;
 }

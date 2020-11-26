@@ -1,5 +1,5 @@
 .popup__close-icon {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 40 40'%3E%3Cdefs/%3E%3Cpath fill='%23fff' d='M17.778 0v17.778H0v4.444h17.778V40h4.444V22.222H40v-4.444H22.222V0h-4.444z'/%3E%3C/svg%3E");
+  background-image: url("../../../images/clsIcon.svg");
   position: absolute;
   width: 40px;
   height: 40px;
@@ -20,6 +20,7 @@
 
 @media screen and (max-width: 380px) {
   .popup__close-icon {
+    background-size: 26px 26px;
     width: 26px;
     height: 26px;
     top: -45px;
