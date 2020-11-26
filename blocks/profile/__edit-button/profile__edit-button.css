@@ -1,5 +1,5 @@
 .profile__edit-button {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 10 10'%3E%3Cdefs/%3E%3Cpath fill='%23fff' d='M10 1.328L2.604 8.767 1.283 7.419 8.66 0 10 1.328zM0 10l1.962-.588L.585 8.083 0 10z'/%3E%3C/svg%3E");
+  background-image: url("../../../images/eddButt.svg");
   padding: 0;
   background-color: #000000;
   background-size: 10px 10px;
@@ -25,5 +25,6 @@
     width: 18px;
     height: 18px;
     margin-right: 19px;
+    background-size: 7.5px 7.5px;
   }
 }
