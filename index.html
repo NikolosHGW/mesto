@@ -79,14 +79,14 @@
   </div>
   <div class="popup">
     <div class="popup__container">
-      <a href="#" target="_self" class="popup__close-icon"></a>
+      <button class="popup__close-icon" type="button" aria-label="close"></button>
       <h2 class="popup__heading">Редактировать профиль</h2>
-      <form class="popup__form">
+      <form class="popup__form" name="popupForm">
         <fieldset class="popup__input-text">
-          <input class="popup__edit-name" type="text">
-          <input class="popup__edit-job" type="text">
+          <input class="popup__input popup__input_el_name" type="text" name="name">
+          <input class="popup__input popup__input_el_job" type="text" name="job">
         </fieldset>
-        <input class="popup__save-button" type="submit" value="Сохранить">
+        <button class="popup__save-button" type="submit">Сохранить</button>
       </form>
     </div>
   </div>

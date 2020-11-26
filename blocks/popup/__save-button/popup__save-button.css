@@ -12,6 +12,7 @@
   line-height: 1.22;
   border-radius: 2px;
   outline: 0;
+  cursor: pointer;
   transition: background-color .4s linear;
 }
 
