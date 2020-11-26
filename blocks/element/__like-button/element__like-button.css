@@ -4,6 +4,10 @@
   background-size: 20.76px 18.13px;
   width: 20.76px;
   height: 18.13px;
+  outline: 0;
+  border: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
   transition: opacity .4s linear;
 }
 
