@@ -1,5 +1,27 @@
 .elements {
   width: 100%;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 282px);
+  gap: 20px 17px;
+}
+
+@media screen and (min-width: 581px) and (max-width: 880px) {
+  .elements {
+    max-width: 581px;
+  }
+}
+
+@media screen and (min-width: 282px) and (max-width: 580px) {
+  .elements {
+    max-width: 282px;
+  }
+}
+
+@media screen and (max-width: 281px) {
+  .elements {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }

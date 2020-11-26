@@ -1,4 +1,7 @@
 .element {
   max-width: 282px;
   font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+  border-radius: 10px;
+  background-color: #ffffff;
+  overflow: hidden;
 }
