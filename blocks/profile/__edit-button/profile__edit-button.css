@@ -12,6 +12,7 @@
   grid-area: edbut;
   align-self: center;
   outline: 0;
+  cursor: pointer;
   transition: opacity .4s linear;
 }
 
