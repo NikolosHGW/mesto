@@ -5,9 +5,12 @@ const addButton = document.querySelector(".profile__add-button");
 const clsButtonEdd = popupEdd.querySelector(".popup__close-icon");
 const clsButtonAdd = popupAdd.querySelector(".popup__close-icon");
 const profile = document.querySelector(".profile");
-const formElement = document.querySelector(".popup__form");
+const formElement = popupEdd.querySelector(".popup__form");
+const formElementAdd = popupAdd.querySelector(".popup__form");
 const nameInput = popupEdd.querySelector(".popup__input_el_name");
 const jobInput = popupEdd.querySelector(".popup__input_el_job");
+const cardNameInput = popupAdd.querySelector(".popup__input_el_card-name");
+const imgLinkInput = popupAdd.querySelector(".popup__input_el_img-link");
 const profName = profile.querySelector(".profile__name");
 const profJob = profile.querySelector(".profile__job");
 const elementTemplate = document.querySelector("#element-template").content;
@@ -58,6 +61,8 @@ function opnEddPopup() {
 //Функция для открытия Popup окна добавления
 function opnAddPopup() {
   popupAdd.classList.add("popup_opened"); //добавляет стиль с display:flex, чтобы перекрыть display:none
+  cardNameInput.value = null;
+  imgLinkInput.value = null;
 }
 
 //Функция для закрытия Popup окон
@@ -75,9 +80,20 @@ function formSubmitHandler(evt) {
   clsPopup();
 }
 
+function formAddSubmitHandler(evt) {
+  evt.preventDefault(); // сбрасывает стандартную отправку формы
+
+  const newElementItem = elementTemplate.cloneNode(true);
+  newElementItem.querySelector(".element__heading").textContent = cardNameInput.value;
+  newElementItem.querySelector(".element__img").src = imgLinkInput.value;
+  elementsSection.prepend(newElementItem);
+  clsPopup();
+}
+
 
 eddButton.addEventListener("click", opnEddPopup);
 addButton.addEventListener("click", opnAddPopup);
 clsButtonEdd.addEventListener("click", clsPopup);
 clsButtonAdd.addEventListener("click", clsPopup);
-formElement.addEventListener('submit', formSubmitHandler);
+formElement.addEventListener("submit", formSubmitHandler);
+formElementAdd.addEventListener("submit", formAddSubmitHandler);
