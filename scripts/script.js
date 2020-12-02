@@ -1,10 +1,13 @@
-const popup = document.querySelector(".popup");
+const popupEdd = document.querySelector(".popup_edd");
+const popupAdd = document.querySelector(".popup_add");
 const eddButton = document.querySelector(".profile__edit-button");
-const clsButton = popup.querySelector(".popup__close-icon");
+const addButton = document.querySelector(".profile__add-button");
+const clsButtonEdd = popupEdd.querySelector(".popup__close-icon");
+const clsButtonAdd = popupAdd.querySelector(".popup__close-icon");
 const profile = document.querySelector(".profile");
 const formElement = document.querySelector(".popup__form");
-const nameInput = popup.querySelector(".popup__input_el_name");
-const jobInput = popup.querySelector(".popup__input_el_job");
+const nameInput = popupEdd.querySelector(".popup__input_el_name");
+const jobInput = popupEdd.querySelector(".popup__input_el_job");
 const profName = profile.querySelector(".profile__name");
 const profJob = profile.querySelector(".profile__job");
 const elementTemplate = document.querySelector("#element-template").content;
@@ -45,16 +48,22 @@ initialCards.forEach(item => {
 });
 
 
-//Функция для открытия Popup окна
-function opnPopup() {
-  popup.classList.add("popup_opened"); //добавляет стиль с display:flex, чтобы перекрыть display:none
+//Функция для открытия Popup окна редактирования
+function opnEddPopup() {
+  popupEdd.classList.add("popup_opened"); //добавляет стиль с display:flex, чтобы перекрыть display:none
   nameInput.value = profName.textContent;
   jobInput.value = profJob.textContent;
 }
 
-//Функция для закрытия Popup окна
+//Функция для открытия Popup окна добавления
+function opnAddPopup() {
+  popupAdd.classList.add("popup_opened"); //добавляет стиль с display:flex, чтобы перекрыть display:none
+}
+
+//Функция для закрытия Popup окон
 function clsPopup() {
-  popup.classList.remove("popup_opened"); // убирает модификатор со стилем display:flex
+  popupEdd.classList.remove("popup_opened"); // убирает модификатор со стилем display:flex
+  popupAdd.classList.remove("popup_opened");
 }
 
 //Функция для отправки данных из инпут полей Popup в profile
@@ -67,6 +76,8 @@ function formSubmitHandler(evt) {
 }
 
 
-eddButton.addEventListener("click", opnPopup);
-clsButton.addEventListener("click", clsPopup);
+eddButton.addEventListener("click", opnEddPopup);
+addButton.addEventListener("click", opnAddPopup);
+clsButtonEdd.addEventListener("click", clsPopup);
+clsButtonAdd.addEventListener("click", clsPopup);
 formElement.addEventListener('submit', formSubmitHandler);

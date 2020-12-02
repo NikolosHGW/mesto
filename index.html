@@ -44,7 +44,7 @@
       <p class="footer__copy">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
-  <div class="popup">
+  <div class="popup popup_edd">
     <div class="popup__container">
       <button class="popup__close-icon" type="button" aria-label="close"></button>
       <h2 class="popup__heading">Редактировать профиль</h2>
@@ -54,6 +54,19 @@
           <input class="popup__input popup__input_el_job" type="text" name="job">
         </fieldset>
         <button class="popup__save-button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_add">
+    <div class="popup__container">
+      <button class="popup__close-icon" type="button" aria-label="close"></button>
+      <h2 class="popup__heading">Новое место</h2>
+      <form class="popup__form" name="popupForm">
+        <fieldset class="popup__input-text">
+          <input class="popup__input popup__input_el_name" type="text" name="name">
+          <input class="popup__input popup__input_el_job" type="text" name="job">
+        </fieldset>
+        <button class="popup__save-button" type="submit">Создать</button>
       </form>
     </div>
   </div>
