@@ -47,6 +47,9 @@ initialCards.forEach(item => {
   const elementItem = elementTemplate.cloneNode(true);
   elementItem.querySelector(".element__img").src = item.link;
   elementItem.querySelector(".element__heading").textContent = item.name;
+  elementItem.querySelector(".element__like-button").addEventListener("click", evt => {
+    evt.target.classList.toggle("element__like-button_active");
+  });
   elementsSection.append(elementItem);
 });
 
@@ -80,12 +83,16 @@ function formSubmitHandler(evt) {
   clsPopup();
 }
 
+//Функция создания карточек
 function formAddSubmitHandler(evt) {
   evt.preventDefault(); // сбрасывает стандартную отправку формы
 
   const newElementItem = elementTemplate.cloneNode(true);
   newElementItem.querySelector(".element__heading").textContent = cardNameInput.value;
   newElementItem.querySelector(".element__img").src = imgLinkInput.value;
+  newElementItem.querySelector(".element__like-button").addEventListener("click", evt => {
+    evt.target.classList.toggle("element__like-button_active");
+  });
   elementsSection.prepend(newElementItem);
   clsPopup();
 }

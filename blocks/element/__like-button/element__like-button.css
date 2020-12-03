@@ -15,8 +15,3 @@
 .element__like-button:hover {
   opacity: .5;
 }
-
-.element__like-button:focus {
-  background-image: url("../../../images/likeFill.svg");
-  background-size: 20.76px 18.13px;
-}
