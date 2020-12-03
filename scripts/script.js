@@ -50,6 +50,7 @@ initialCards.forEach(item => {
   elementItem.querySelector(".element__like-button").addEventListener("click", evt => {
     evt.target.classList.toggle("element__like-button_active");
   });
+  elementItem.querySelector(".element__del-button").addEventListener("click", deleteCard);
   elementsSection.append(elementItem);
 });
 
@@ -83,6 +84,11 @@ function formSubmitHandler(evt) {
   clsPopup();
 }
 
+//Функция для удаления карточек
+function deleteCard(evt) {
+  evt.target.closest(".element").remove();
+}
+
 //Функция создания карточек
 function formAddSubmitHandler(evt) {
   evt.preventDefault(); // сбрасывает стандартную отправку формы
@@ -93,6 +99,7 @@ function formAddSubmitHandler(evt) {
   newElementItem.querySelector(".element__like-button").addEventListener("click", evt => {
     evt.target.classList.toggle("element__like-button_active");
   });
+  newElementItem.querySelector(".element__del-button").addEventListener("click", deleteCard);
   elementsSection.prepend(newElementItem);
   clsPopup();
 }
