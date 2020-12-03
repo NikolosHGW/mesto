@@ -1,0 +1,29 @@
+.popup-img__close-icon {
+  background-image: url("../../../images/clsIcon.svg");
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: -40px;
+  right: -40px;
+  outline: 0;
+  border: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transform: rotate(-45deg);
+  transition: opacity .4s linear;
+}
+
+.popup-img__close-icon:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 380px) {
+  .popup-img__close-icon {
+    background-size: 26px 26px;
+    width: 26px;
+    height: 26px;
+    top: -45px;
+    right: 5px;
+  }
+}

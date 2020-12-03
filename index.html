@@ -30,7 +30,7 @@
       <section class="elements content__elements">
         <template id="element-template">
           <article class="element">
-            <img class="element__img" alt="загруженная картинка">
+            <button class="element__img-button" type="button"><img class="element__img" alt="загруженная картинка"></button>
             <button class="element__del-button" type="button" aria-label="delet"></button>
             <div class="element__info">
               <h2 class="element__heading"></h2>
@@ -69,6 +69,13 @@
         </fieldset>
         <button class="popup__save-button" type="submit">Создать</button>
       </form>
+    </div>
+  </div>
+  <div class="popup-img">
+    <div class="popup-img__container">
+      <img class="popup-img__img" src="/" alt="Загруженная картинка в большем разрешении">
+      <p class="popup-img__caption"></p>
+      <button class="popup-img__close-icon" type="button" aria-label="close"></button>
     </div>
   </div>
 
