@@ -8,5 +8,8 @@
   align-items: center;
   background-color: rgba(0,0,0,.5);
   font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
-  display: none;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .4s, opacity .4s linear;
 }
