@@ -78,6 +78,7 @@ function createCard(link, name) {
   elementItem.querySelector(".element__del-button").addEventListener("click", evt => {evt.target.closest(".element").remove()});
   elementItem.querySelector(".element__img-button").addEventListener("click", evt => {
     bigImg.src = evt.target.src;
+    bigImg.alt = evt.target.alt;
     captionBigImg.textContent = evt.target.parentElement.parentElement.querySelector(".element__heading").textContent;
     opnPopup(popupImg);
   });
