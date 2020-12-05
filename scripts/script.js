@@ -18,7 +18,7 @@ const profJob = profile.querySelector(".profile__job");
 const bigImg = popupImg.querySelector(".popup-img__img");
 const captionBigImg = popupImg.querySelector(".popup-img__caption");
 const elementTemplate = document.querySelector("#element-template").content;
-const elementsSection = document.querySelector(".elements");
+const elementsContainer = document.querySelector(".elements");
 const initialCards = [
   {
       name: 'Архыз',
@@ -66,42 +66,39 @@ function formSubmitHandler(evt) {
   clsPopup(popupEdt);
 }
 
-//Функция для удаления карточек
-function deleteCard(evt) {
-  evt.target.closest(".element").remove();
-}
-
-//Функция для открытия картинки на 75% размера экрана
-function viewImg(evt) {
-  bigImg.src = evt.target.src;
-  captionBigImg.textContent = evt.target.parentElement.parentElement.querySelector(".element__heading").textContent;
-  opnPopup(popupImg);
-}
-
-//Функция для генерации карточек
-function generateCards(valImg, valHeading, append = false) {
+//Функция для создания карточек
+function createCard(link, name) {
   const elementItem = elementTemplate.cloneNode(true);
-  elementItem.querySelector(".element__img").src = valImg;
+  elementItem.querySelector(".element__img").src = link;
   elementItem.querySelector(".element__img").alt = "Загруженная картинка";
-  elementItem.querySelector(".element__heading").textContent = valHeading;
+  elementItem.querySelector(".element__heading").textContent = name;
   elementItem.querySelector(".element__like-button").addEventListener("click", evt => {
     evt.target.classList.toggle("element__like-button_active");
   });
-  elementItem.querySelector(".element__del-button").addEventListener("click", deleteCard);
-  elementItem.querySelector(".element__img-button").addEventListener("click", viewImg);
-  append ? elementsSection.append(elementItem) : elementsSection.prepend(elementItem);
+  elementItem.querySelector(".element__del-button").addEventListener("click", evt => {evt.target.closest(".element").remove()});
+  elementItem.querySelector(".element__img-button").addEventListener("click", evt => {
+    bigImg.src = evt.target.src;
+    captionBigImg.textContent = evt.target.parentElement.parentElement.querySelector(".element__heading").textContent;
+    opnPopup(popupImg);
+  });
+  return elementItem;
+}
+
+//Функция для добавления карточки в контейнер
+function addCard(container, cardElement, append = false) {
+  append ? container.append(cardElement) : container.prepend(cardElement);
 }
 
 //Заполнение карточками страницы при ее загрузке
 initialCards.forEach(item => {
-  generateCards(item.link, item.name, true);
+  addCard(elementsContainer, createCard(item.link, item.name), true);
 });
 
 //Функция для добавлении новых карточек
 function formAddSubmitHandler(evt) {
   evt.preventDefault(); // сбрасывает стандартную отправку формы
 
-  generateCards(imgLinkInput.value, cardNameInput.value);
+  addCard(elementsContainer, createCard(imgLinkInput.value, cardNameInput.value));
   clsPopup(popupAdd);
 }
 
