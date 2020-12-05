@@ -1,6 +1,6 @@
 const popupEdt = document.querySelector(".popup_edd");
 const popupAdd = document.querySelector(".popup_add");
-const popupImg = document.querySelector(".popup-img");
+const popupImg = document.querySelector(".popup_img");
 const buttonEdt = document.querySelector(".profile__edit-button");
 const buttonAdd = document.querySelector(".profile__add-button");
 const buttonClsEdt = popupEdt.querySelector(".popup__close-icon");
@@ -47,25 +47,14 @@ const initialCards = [
 ];
 
 
-//Функция для открытия Popup окна редактирования
-function opnEddPopup() {
-  popupEdt.classList.add("popup_opened"); //добавляет стиль с display:flex, чтобы перекрыть display:none
-  nameInput.value = profName.textContent;
-  jobInput.value = profJob.textContent;
-}
-
-//Функция для открытия Popup окна добавления
-function opnAddPopup() {
-  popupAdd.classList.add("popup_opened"); //добавляет стиль с display:flex, чтобы перекрыть display:none
-  cardNameInput.value = null;
-  imgLinkInput.value = null;
+//Функция для открытия Popup окон
+function opnPopup(popup) {
+  popup.classList.add("popup_opened"); //добавляет стиль с visibility:visible, чтобы перекрыть visibility:hide
 }
 
 //Функция для закрытия Popup окон
-function clsPopup() {
-  popupEdt.classList.remove("popup_opened"); // убирает модификатор со стилем display:flex
-  popupAdd.classList.remove("popup_opened");
-  popupImg.classList.remove("popup-img_opened");
+function clsPopup(popup) {
+  popup.classList.remove("popup_opened"); // убирает модификатор со стилем visibility:visible
 }
 
 //Функция для отправки данных из инпут полей Popup в profile
@@ -74,7 +63,7 @@ function formSubmitHandler(evt) {
 
   profName.textContent = nameInput.value;
   profJob.textContent = jobInput.value;
-  clsPopup();
+  clsPopup(popupEdt);
 }
 
 //Функция для удаления карточек
@@ -86,13 +75,14 @@ function deleteCard(evt) {
 function viewImg(evt) {
   bigImg.src = evt.target.src;
   captionBigImg.textContent = evt.target.parentElement.parentElement.querySelector(".element__heading").textContent;
-  popupImg.classList.add("popup-img_opened");
+  opnPopup(popupImg);
 }
 
 //Функция для генерации карточек
 function generateCards(valImg, valHeading, append = false) {
   const elementItem = elementTemplate.cloneNode(true);
   elementItem.querySelector(".element__img").src = valImg;
+  elementItem.querySelector(".element__img").alt = "Загруженная картинка";
   elementItem.querySelector(".element__heading").textContent = valHeading;
   elementItem.querySelector(".element__like-button").addEventListener("click", evt => {
     evt.target.classList.toggle("element__like-button_active");
@@ -112,14 +102,21 @@ function formAddSubmitHandler(evt) {
   evt.preventDefault(); // сбрасывает стандартную отправку формы
 
   generateCards(imgLinkInput.value, cardNameInput.value);
-  clsPopup();
+  clsPopup(popupAdd);
 }
 
 
-buttonEdt.addEventListener("click", opnEddPopup);
-buttonAdd.addEventListener("click", opnAddPopup);
-buttonClsEdt.addEventListener("click", clsPopup);
-buttonClsAdd.addEventListener("click", clsPopup);
-buttonClsImg.addEventListener("click", clsPopup);
+buttonEdt.addEventListener("click", () => {
+  nameInput.value = profName.textContent;
+  jobInput.value = profJob.textContent;
+  opnPopup(popupEdt);
+});
+buttonAdd.addEventListener("click", () => {
+  formElementAdd.reset();
+  opnPopup(popupAdd)
+});
+buttonClsEdt.addEventListener("click", () => {clsPopup(popupEdt)});
+buttonClsAdd.addEventListener("click", () => {clsPopup(popupAdd)});
+buttonClsImg.addEventListener("click", () => {clsPopup(popupImg)});
 formElement.addEventListener("submit", formSubmitHandler);
 formElementAdd.addEventListener("submit", formAddSubmitHandler);
