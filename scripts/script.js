@@ -69,14 +69,20 @@ function formSubmitHandler(evt) {
 //Функция для создания карточек
 function createCard(link, name) {
   const elementItem = elementTemplate.cloneNode(true);
-  elementItem.querySelector(".element__img").src = link;
-  elementItem.querySelector(".element__img").alt = "Загруженная картинка";
-  elementItem.querySelector(".element__heading").textContent = name;
-  elementItem.querySelector(".element__like-button").addEventListener("click", evt => {
+  const imgElement = elementItem.querySelector(".element__img");
+  const headingElement = elementItem.querySelector(".element__heading");
+  const buttonLike = elementItem.querySelector(".element__like-button");
+  const buttonDel = elementItem.querySelector(".element__del-button");
+  const buttonImg = elementItem.querySelector(".element__img-button");
+
+  imgElement.src = link;
+  imgElement.alt = "Загруженная картинка";
+  headingElement.textContent = name;
+  buttonLike.addEventListener("click", evt => {
     evt.target.classList.toggle("element__like-button_active");
   });
-  elementItem.querySelector(".element__del-button").addEventListener("click", evt => {evt.target.closest(".element").remove()});
-  elementItem.querySelector(".element__img-button").addEventListener("click", evt => {
+  buttonDel.addEventListener("click", evt => {evt.target.closest(".element").remove()});
+  buttonImg.addEventListener("click", evt => {
     bigImg.src = evt.target.src;
     bigImg.alt = evt.target.alt;
     captionBigImg.textContent = evt.target.parentElement.parentElement.querySelector(".element__heading").textContent;
