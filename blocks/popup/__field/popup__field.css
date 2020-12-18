@@ -1,0 +1,11 @@
+.popup__field {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0 0;
+  padding: 0;
+  position: relative;
+}
+
+.popup__field:first-child {
+  margin: 0;
+}
