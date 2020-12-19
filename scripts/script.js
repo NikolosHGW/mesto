@@ -20,8 +20,11 @@ const captionBigImg = popupImg.querySelector(".popup-img__caption");
 const elementTemplate = document.querySelector("#element-template").content;
 const elementsContainer = document.querySelector(".elements");
 const formList = Array.from(document.querySelectorAll(".popup__form"));
-const inputsPopupEdt = Array.from(document.forms.popupForm.querySelectorAll(".popup__input"));
-const submitPopupEdt = document.forms.popupForm.querySelector(".popup__save-button");
+const forms = document.forms;
+const inputsPopupEdt = Array.from(forms.popupForm.querySelectorAll(".popup__input"));
+const inputsPopupAdd = Array.from(forms.popupAddForm.querySelectorAll(".popup__input"));
+const submitPopupEdt = forms.popupForm.querySelector(".popup__save-button");
+const submitPopupAdd = forms.popupAddForm.querySelector(".popup__save-button");
 const initialCards = [
   {
       name: 'Архыз',
@@ -177,21 +180,31 @@ function enableValidation() {
     setEventListeners(formElement);
   });
 }
-enableValidation();
 
 
 buttonEdt.addEventListener("click", () => {
   nameInput.value = profName.textContent;
   jobInput.value = profJob.textContent;
+  inputsPopupEdt.forEach(inputElement => {
+    isValid(forms.popupForm, inputElement);
+  })
   toggleButtonState(inputsPopupEdt, submitPopupEdt);
   opnPopup(popupEdt);
 });
 buttonAdd.addEventListener("click", () => {
   formElementAdd.reset();
+  toggleButtonState(inputsPopupAdd, submitPopupAdd);
   opnPopup(popupAdd)
 });
 buttonClsEdt.addEventListener("click", () => {clsPopup(popupEdt)});
-buttonClsAdd.addEventListener("click", () => {clsPopup(popupAdd)});
+buttonClsAdd.addEventListener("click", () => {
+  clsPopup(popupAdd);
+  inputsPopupAdd.forEach(inputElement => {
+    hideInputError(forms.popupAddForm, inputElement);
+  })
+});
 buttonClsImg.addEventListener("click", () => {clsPopup(popupImg)});
 formElement.addEventListener("submit", formSubmitHandler);
 formElementAdd.addEventListener("submit", formAddSubmitHandler);
+
+enableValidation();
