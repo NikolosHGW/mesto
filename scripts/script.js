@@ -1,3 +1,5 @@
+const body = document.querySelector(".body");
+const popups = Array.from(document.querySelectorAll(".popup"));
 const popupEdt = document.querySelector(".popup_edd");
 const popupAdd = document.querySelector(".popup_add");
 const popupImg = document.querySelector(".popup_img");
@@ -5,7 +7,7 @@ const buttonEdt = document.querySelector(".profile__edit-button");
 const buttonAdd = document.querySelector(".profile__add-button");
 const buttonClsEdt = popupEdt.querySelector(".popup__close-icon");
 const buttonClsAdd = popupAdd.querySelector(".popup__close-icon");
-const buttonClsImg = popupImg.querySelector(".popup-img__close-icon");
+const buttonClsImg = popupImg.querySelector(".popup__close-icon");
 const profile = document.querySelector(".profile");
 const formElement = popupEdt.querySelector(".popup__form");
 const formElementAdd = popupAdd.querySelector(".popup__form");
@@ -101,11 +103,6 @@ function createCard(link, name) {
 function addCard(container, cardElement, append = false) {
   append ? container.append(cardElement) : container.prepend(cardElement);
 }
-
-//Заполнение карточками страницы при ее загрузке
-initialCards.forEach(item => {
-  addCard(elementsContainer, createCard(item.link, item.name), true);
-});
 
 //Функция для добавлении новых карточек
 function formAddSubmitHandler(evt) {
@@ -206,5 +203,24 @@ buttonClsAdd.addEventListener("click", () => {
 buttonClsImg.addEventListener("click", () => {clsPopup(popupImg)});
 formElement.addEventListener("submit", formSubmitHandler);
 formElementAdd.addEventListener("submit", formAddSubmitHandler);
+body.addEventListener("keydown", evt => {
+  if (evt.key == "Escape") {
+    if (body.querySelector(".popup_opened")) {
+      body.querySelector(".popup_opened").classList.remove("popup_opened");
+    }
+  }
+});
 
+
+popups.forEach(popup => {
+  popup.addEventListener("click", evt => {
+    if (evt.target.classList.contains("popup")) {
+      clsPopup(evt.target);
+    }
+  });
+});
+//Заполнение карточками страницы при ее загрузке
+initialCards.forEach(item => {
+  addCard(elementsContainer, createCard(item.link, item.name), true);
+});
 enableValidation();
