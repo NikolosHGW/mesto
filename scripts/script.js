@@ -63,13 +63,15 @@ const initialCards = [
 
 
 //Функция для открытия Popup окон
-function opnPopup(popup) {
+function openPopup(popup) {
   popup.classList.add("popup_opened"); //добавляет стиль с visibility:visible, чтобы перекрыть visibility:hide
+  addAnyListeners(body, "keydown", closePopupWithEscape);
 }
 
 //Функция для закрытия Popup окон
-function clsPopup(popup) {
+function closePopup(popup) {
   popup.classList.remove("popup_opened"); // убирает модификатор со стилем visibility:visible
+  removeAnyListeners(body, "keydown", closePopupWithEscape);
 }
 
 //Функция для отправки данных из инпут полей Popup в profile
@@ -78,7 +80,7 @@ function formSubmitHandler(evt) {
 
   profName.textContent = nameInput.value;
   profJob.textContent = jobInput.value;
-  clsPopup(popupEdt);
+  closePopup(popupEdt);
 }
 
 //Функция для создания карточек
@@ -91,18 +93,17 @@ function createCard(link, name) {
   const buttonImg = elementItem.querySelector(".element__img-button");
 
   imgElement.src = link;
-  imgElement.alt = "Загруженная картинка";
+  imgElement.alt = "Загруженная картинка: " + name;
   headingElement.textContent = name;
   buttonLike.addEventListener("click", evt => {
     evt.target.classList.toggle("element__like-button_active");
   });
   buttonDel.addEventListener("click", evt => {evt.target.closest(".element").remove()});
   buttonImg.addEventListener("click", evt => {
-    bigImg.src = evt.target.src;
-    bigImg.alt = evt.target.alt;
-    captionBigImg.textContent = evt.target.parentElement.parentElement.querySelector(".element__heading").textContent;
-    addAnyListeners(body, "keydown", closePopupWithEscape);
-    opnPopup(popupImg);
+    bigImg.src = link;
+    bigImg.alt = name;
+    captionBigImg.textContent = name;
+    openPopup(popupImg);
   });
   return elementItem;
 }
@@ -117,15 +118,15 @@ function formAddSubmitHandler(evt) {
   evt.preventDefault(); // сбрасывает стандартную отправку формы
 
   addCard(elementsContainer, createCard(imgLinkInput.value, cardNameInput.value));
-  clsPopup(popupAdd);
+  closePopup(popupAdd);
 }
 
 //Функция для закрытия попапа при событии keydown равное esc
 function closePopupWithEscape(evt) {
   if (evt.key == "Escape") {
-    if (body.querySelector(".popup_opened")) {
-      body.querySelector(".popup_opened").classList.remove("popup_opened");
-      removeAnyListeners(body, "keydown", closePopupWithEscape);
+    const openedPopup = document.querySelector('.popup_opened')
+    if (openedPopup) {
+      closePopup(openedPopup);
     }
   }
 }
@@ -148,23 +149,19 @@ buttonEdt.addEventListener("click", () => {
     checkInputValidity(forms.popupForm, inputElement, objValidation.inputErrorClass, objValidation.errorClass);
   })
   toggleButtonState(inputsPopupEdt, submitPopupEdt, objValidation.inactiveButtonClass);
-  addAnyListeners(body, "keydown", closePopupWithEscape);
-  opnPopup(popupEdt);
+  openPopup(popupEdt);
 });
 buttonAdd.addEventListener("click", () => {
   formElementAdd.reset();
-  toggleButtonState(inputsPopupAdd, submitPopupAdd, objValidation.inactiveButtonClass);
-  addAnyListeners(body, "keydown", closePopupWithEscape);
-  opnPopup(popupAdd);
-});
-buttonClsEdt.addEventListener("click", () => {clsPopup(popupEdt)});
-buttonClsAdd.addEventListener("click", () => {
-  clsPopup(popupAdd);
   inputsPopupAdd.forEach(inputElement => {
     hideInputError(forms.popupAddForm, inputElement, objValidation.inputErrorClass, objValidation.errorClass);
   });
+  toggleButtonState(inputsPopupAdd, submitPopupAdd, objValidation.inactiveButtonClass);
+  openPopup(popupAdd);
 });
-buttonClsImg.addEventListener("click", () => {clsPopup(popupImg)});
+buttonClsEdt.addEventListener("click", () => {closePopup(popupEdt)});
+buttonClsAdd.addEventListener("click", () => {closePopup(popupAdd)});
+buttonClsImg.addEventListener("click", () => {closePopup(popupImg)});
 formElement.addEventListener("submit", formSubmitHandler);
 formElementAdd.addEventListener("submit", formAddSubmitHandler);
 
@@ -173,7 +170,7 @@ formElementAdd.addEventListener("submit", formAddSubmitHandler);
 popups.forEach(popup => {
   popup.addEventListener("click", evt => {
     if (evt.target.classList.contains("popup")) {
-      clsPopup(evt.target);
+      closePopup(evt.target);
     }
   });
 });
