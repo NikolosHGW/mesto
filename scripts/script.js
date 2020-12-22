@@ -145,7 +145,7 @@ buttonEdt.addEventListener("click", () => {
   nameInput.value = profName.textContent;
   jobInput.value = profJob.textContent;
   inputsPopupEdt.forEach(inputElement => {
-    isValid(forms.popupForm, inputElement, objValidation.inputErrorClass, objValidation.errorClass);
+    checkInputValidity(forms.popupForm, inputElement, objValidation.inputErrorClass, objValidation.errorClass);
   })
   toggleButtonState(inputsPopupEdt, submitPopupEdt, objValidation.inactiveButtonClass);
   addAnyListeners(body, "keydown", closePopupWithEscape);

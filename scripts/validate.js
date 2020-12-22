@@ -1,6 +1,3 @@
-const formList = Array.from(document.querySelectorAll(".popup__form"));
-
-
 //Функция показывает span с ошибкой
 function showInputError(formElement, inputElement, errorMessage, inputErrorClass, errorClass) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -18,7 +15,7 @@ function hideInputError(formElement, inputElement, inputErrorClass, errorClass) 
 }
 
 //Функция управляет видимостью span-ошибки в зависимости от свойства valid у input полей
-function isValid(formElement, inputElement, inputErrorClass, errorClass) {
+function checkInputValidity(formElement, inputElement, inputErrorClass, errorClass) {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage, inputErrorClass, errorClass);
   }
@@ -51,7 +48,7 @@ function setEventListeners(formElement, obj) {
   toggleButtonState(inputList, buttonElement, obj.inactiveButtonClass);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
-      isValid(formElement, inputElement, obj.inputErrorClass, obj.errorClass);
+      checkInputValidity(formElement, inputElement, obj.inputErrorClass, obj.errorClass);
       toggleButtonState(inputList, buttonElement, obj.inactiveButtonClass);
     });
   });
@@ -59,6 +56,7 @@ function setEventListeners(formElement, obj) {
 
 //Функция выявляет все формы на странице, сбрасывает им дефолтное поведение и передает каждую форму в setEventListeners
 function enableValidation(obj) {
+  const formList = Array.from(document.querySelectorAll(obj.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
