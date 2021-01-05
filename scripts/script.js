@@ -84,31 +84,6 @@ function closePopup(popup) {
 //   closePopup(popupEdt);
 // }
 
-// //Функция для создания карточек DELETE
-// function createCard(link, name) {
-//   const elementItem = elementTemplate.cloneNode(true);
-//   const imgElement = elementItem.querySelector(".element__img");
-//   const headingElement = elementItem.querySelector(".element__heading");
-//   const buttonLike = elementItem.querySelector(".element__like-button");
-//   const buttonDel = elementItem.querySelector(".element__del-button");
-//   const buttonImg = elementItem.querySelector(".element__img-button");
-
-//   imgElement.src = link;
-//   imgElement.alt = "Загруженная картинка: " + name;
-//   headingElement.textContent = name;
-//   buttonLike.addEventListener("click", evt => {
-//     evt.target.classList.toggle("element__like-button_active");
-//   });
-//   buttonDel.addEventListener("click", evt => {evt.target.closest(".element").remove()});
-//   buttonImg.addEventListener("click", evt => {
-//     bigImg.src = link;
-//     bigImg.alt = name;
-//     captionBigImg.textContent = name;
-//     openPopup(popupImg);
-//   });
-//   return elementItem;
-// }
-
 //Функция для добавления карточки в контейнер
 function addCard(container, cardElement, append = false) {
   append ? container.append(cardElement) : container.prepend(cardElement);
