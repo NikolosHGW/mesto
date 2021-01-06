@@ -14,7 +14,7 @@ export default class FormValidator {
     this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
   }
 
-  //Функция показывает span с ошибкой
+  //Метод показывает span с ошибкой
   _showInputError(inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
@@ -22,7 +22,7 @@ export default class FormValidator {
     errorElement.classList.add(this._errorClass);
   }
 
-  //Функция скрывает span с ошибкой
+  //Метод скрывает span с ошибкой
   _hideInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._inputErrorClass);
@@ -30,12 +30,12 @@ export default class FormValidator {
     errorElement.textContent = "";
   }
 
-  //Функция ищет невалидное свойство в объекте validity в списке инпутов
+  //Метод ищет невалидное свойство в объекте validity в списке инпутов
   _hasInvalidInput() {
     return this._inputList.some(inputElement => !inputElement.validity.valid);
   }
 
-  //Функция меняет активность кнопки в зависимости от валидности свойств в объекте validity
+  //Метод меняет активность кнопки в зависимости от валидности свойств в объекте validity
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
       this._submitButton.classList.add(this._inactiveButtonClass);
@@ -47,7 +47,7 @@ export default class FormValidator {
     }
   }
 
-  //Функция управляет видимостью span-ошибки в зависимости от свойства valid у input полей
+  //Метод управляет видимостью span-ошибки в зависимости от свойства valid у input полей
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
@@ -57,15 +57,16 @@ export default class FormValidator {
     }
   }
 
-  //Функция вешает на инпуты(поля) определенной формы слушатель события 'input'
-  _setEventListeners() {
-    this._formElement.addEventListener("submit", evt => {
-      evt.preventDefault();
+  //Метод для проверки инпутов
+  _hideInputsErrors() {
+    this._inputList.forEach(inputElement => {
+      this._hideInputError(inputElement);
     });
-    // const inputList = Array.from(formElement.querySelectorAll(obj.inputSelector));
-    // const buttonElement = formElement.querySelector(obj.submitButtonSelector);
-    // this._toggleButtonState(this._inputList, this._submitButton, this._inactiveButtonClass);
-    this._inputList.forEach((inputElement) => {
+  }
+
+  //Метод вешает на инпуты(поля) определенной формы слушатель события 'input'
+  _setEventListeners() {
+    this._inputList.forEach(inputElement => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
@@ -73,20 +74,11 @@ export default class FormValidator {
     });
   }
 
-  //Функция выявляет все формы на странице, сбрасывает им дефолтное поведение и передает каждую форму в setEventListeners
+  //Публичный метод запускает проверку формы
   enableValidation() {
-    // this._formElement.addEventListener("submit", evt => {
-    //   evt.preventDefault();
-    // });
     this._initialVariables();
     this._toggleButtonState();
+    this._hideInputsErrors();
     this._setEventListeners();
-    // const formList = Array.from(document.querySelectorAll(obj.formSelector));
-    // formList.forEach((formElement) => {
-    //   formElement.addEventListener("submit", (evt) => {
-    //     evt.preventDefault();
-    //   });
-    //   setEventListeners(formElement, obj);
-    // });
   }
 }
