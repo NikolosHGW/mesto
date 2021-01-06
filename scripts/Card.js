@@ -16,7 +16,6 @@ export default class Card {
     this._headingElement = this._element.querySelector(".element__heading");
     this._buttonLikeElement = this._element.querySelector(".element__like-button");
     this._buttonDelElement = this._element.querySelector(".element__del-button");
-    this.buttonImgElement = this._element.querySelector(".element__img-button");
   }
 
   _toggleButtonActive(evt) {
