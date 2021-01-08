@@ -31,7 +31,9 @@ const config = {
   errorClass: "popup__input-error_active"
 };
 const formEdtValid = new FormValidator(config, formElementEdt);
+formEdtValid.enableValidation();
 const formAddValid = new FormValidator(config, formElementAdd);
+formAddValid.enableValidation();
 const initialCards = [
   {
       name: 'Архыз',
@@ -131,12 +133,12 @@ function openPopupImg(link, name) {
 buttonEdt.addEventListener("click", () => {
   nameInput.value = profName.textContent;
   jobInput.value = profJob.textContent;
-  formEdtValid.enableValidation();
+  formEdtValid.resetValidation();
   openPopup(popupEdt);
 });
 buttonAdd.addEventListener("click", () => {
   formElementAdd.reset();
-  formAddValid.enableValidation();
+  formAddValid.resetValidation();
   openPopup(popupAdd);
 });
 buttonClsEdt.addEventListener("click", () => {closePopup(popupEdt)});

@@ -9,7 +9,7 @@ export default class FormValidator {
     this._formElement = formElement;
   }
 
-  _initialVariables() {
+  _initVariables() {
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     this._submitButton = this._formElement.querySelector(this._submitButtonSelector);
   }
@@ -57,7 +57,7 @@ export default class FormValidator {
     }
   }
 
-  //Метод для проверки инпутов
+  //Метод для скрытия спан ошибок
   _hideInputsErrors() {
     this._inputList.forEach(inputElement => {
       this._hideInputError(inputElement);
@@ -74,11 +74,14 @@ export default class FormValidator {
     });
   }
 
-  //Публичный метод запускает проверку формы
-  enableValidation() {
-    this._initialVariables();
+  resetValidation() {
     this._toggleButtonState();
     this._hideInputsErrors();
+  }
+
+  //Публичный метод запускает проверку формы
+  enableValidation() {
+    this._initVariables();
     this._setEventListeners();
   }
 }
