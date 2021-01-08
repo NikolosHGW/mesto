@@ -7,9 +7,6 @@ const popupAdd = document.querySelector(".popup_add");
 const popupImg = document.querySelector(".popup_img");
 const buttonEdt = document.querySelector(".profile__edit-button");
 const buttonAdd = document.querySelector(".profile__add-button");
-const buttonClsEdt = popupEdt.querySelector(".popup__close-icon");
-const buttonClsAdd = popupAdd.querySelector(".popup__close-icon");
-const buttonClsImg = popupImg.querySelector(".popup__close-icon");
 const profile = document.querySelector(".profile");
 const formElementEdt = popupEdt.querySelector(".popup__form");
 const formElementAdd = popupAdd.querySelector(".popup__form");
@@ -31,9 +28,7 @@ const config = {
   errorClass: "popup__input-error_active"
 };
 const formEdtValid = new FormValidator(config, formElementEdt);
-formEdtValid.enableValidation();
 const formAddValid = new FormValidator(config, formElementAdd);
-formAddValid.enableValidation();
 const initialCards = [
   {
       name: 'Архыз',
@@ -88,7 +83,7 @@ function addCard(container, cardElement, append = false) {
   append ? container.append(cardElement) : container.prepend(cardElement);
 }
 
-function creatCard(data, templateSelector) {
+function creatCard(data, templateSelector = ".elements__template") {
   const card = new Card(data, templateSelector, openPopupImg);
   const cardElement = card.generateCard();
   return cardElement;
@@ -98,7 +93,7 @@ function creatCard(data, templateSelector) {
 function formAddSubmitHandler(evt) {
   evt.preventDefault(); // сбрасывает стандартную отправку формы
 
-  addCard(elementsContainer, creatCard({ name: cardNameInput.value, link: imgLinkInput.value }, ".elements__template"));
+  addCard(elementsContainer, creatCard({ name: cardNameInput.value, link: imgLinkInput.value }));
   closePopup(popupAdd);
 }
 
@@ -141,12 +136,12 @@ buttonAdd.addEventListener("click", () => {
   formAddValid.resetValidation();
   openPopup(popupAdd);
 });
-buttonClsEdt.addEventListener("click", () => {closePopup(popupEdt)});
-buttonClsAdd.addEventListener("click", () => {closePopup(popupAdd)});
-buttonClsImg.addEventListener("click", () => {closePopup(popupImg)});
 formElementEdt.addEventListener("submit", formSubmitHandler);
 formElementAdd.addEventListener("submit", formAddSubmitHandler);
 
+
+formEdtValid.enableValidation();
+formAddValid.enableValidation();
 
 //Добавление слушателей на все модальный окна для их закрытия по оверлэю
 popups.forEach(popup => {
@@ -154,10 +149,13 @@ popups.forEach(popup => {
     if (evt.target.classList.contains("popup")) {
       closePopup(evt.target);
     }
+    if (evt.target.classList.contains("popup__close-icon")) {
+      closePopup(popup);
+    }
   });
 });
 
 //Заполнение карточками страницы при ее загрузке
 initialCards.forEach(item => {
-  addCard(elementsContainer, creatCard(item, ".elements__template"), true);
+  addCard(elementsContainer, creatCard(item), true);
 });
