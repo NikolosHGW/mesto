@@ -87,9 +87,8 @@ function addCard(container, cardElement, append = false) {
 }
 
 function creatCard(data, templateSelector) {
-  const card = new Card(data, templateSelector);
+  const card = new Card(data, templateSelector, openPopupImg);
   const cardElement = card.generateCard();
-  cardElement.querySelector(".element__img-button").addEventListener("click", () => {openPopupImg(card.link, card.name)});
   return cardElement;
 }
 

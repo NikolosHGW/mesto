@@ -1,8 +1,9 @@
 export default class Card {
-  constructor(data, cardSelector) {
-    this.name = data.name;
-    this.link = data.link;
+  constructor(data, cardSelector, openPopupImg) {
+    this._name = data.name;
+    this._link = data.link;
     this._cardSelector = cardSelector;
+    this._openPopupImg = openPopupImg;
   }
 
   _getTemplate(){
@@ -11,11 +12,12 @@ export default class Card {
     return cardElement;
   }
 
-  _initialVariables() {
+  _initVariables() {
     this._imgElement = this._element.querySelector(".element__img");
     this._headingElement = this._element.querySelector(".element__heading");
     this._buttonLikeElement = this._element.querySelector(".element__like-button");
     this._buttonDelElement = this._element.querySelector(".element__del-button");
+    this._buttonImgElement = this._element.querySelector(".element__img-button");
   }
 
   _toggleButtonActive(evt) {
@@ -29,16 +31,17 @@ export default class Card {
   _setEventListeners(){
     this._buttonLikeElement.addEventListener("click", evt => {this._toggleButtonActive(evt)});
     this._buttonDelElement.addEventListener("click", evt => {this._deleteCard(evt)});
+    this._buttonImgElement.addEventListener("click", () => {this._openPopupImg(this._link, this._name)});
   }
 
   generateCard() {
     this._element = this._getTemplate();
-    this._initialVariables();
+    this._initVariables();
     this._setEventListeners();
 
-    this._imgElement.src = this.link;
-    this._imgElement.alt = "Загруженная картинка: " + this.name;
-    this._headingElement.textContent = this.name;
+    this._imgElement.src = this._link;
+    this._imgElement.alt = "Загруженная картинка: " + this._name;
+    this._headingElement.textContent = this._name;
 
   	return this._element;
   }
