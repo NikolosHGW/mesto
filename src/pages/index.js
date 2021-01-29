@@ -1,5 +1,5 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 const body = document.querySelector(".body");
 const popups = Array.from(document.querySelectorAll(".popup"));
 const popupEdt = document.querySelector(".popup_edd");
