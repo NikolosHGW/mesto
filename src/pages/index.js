@@ -1,61 +1,14 @@
 import './index.css';
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-const body = document.querySelector(".body");
-const popups = Array.from(document.querySelectorAll(".popup"));
-const popupEdt = document.querySelector(".popup_edd");
-const popupAdd = document.querySelector(".popup_add");
-const popupImg = document.querySelector(".popup_img");
-const buttonEdt = document.querySelector(".profile__edit-button");
-const buttonAdd = document.querySelector(".profile__add-button");
-const profile = document.querySelector(".profile");
-const formElementEdt = popupEdt.querySelector(".popup__form");
-const formElementAdd = popupAdd.querySelector(".popup__form");
-const nameInput = popupEdt.querySelector(".popup__input_el_name");
-const jobInput = popupEdt.querySelector(".popup__input_el_job");
-const cardNameInput = popupAdd.querySelector(".popup__input_el_card-name");
-const imgLinkInput = popupAdd.querySelector(".popup__input_el_img-link");
-const profName = profile.querySelector(".profile__name");
-const profJob = profile.querySelector(".profile__job");
-const bigImg = popupImg.querySelector(".popup-img__img");
-const captionBigImg = popupImg.querySelector(".popup-img__caption");
-const elementsContainer = document.querySelector(".elements");
-const config = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save-button",
-  inactiveButtonClass: "popup__save-button_inactive",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__input-error_active"
-};
+import {
+  body, popups, popupEdt, popupAdd, popupImg, buttonEdt, buttonAdd,
+  formElementEdt, formElementAdd, nameInput, jobInput, cardNameInput,
+  imgLinkInput, profName, profJob, bigImg, captionBigImg, elementsContainer, config,
+  initialCards
+} from "../utils/constants.js"
 const formEdtValid = new FormValidator(config, formElementEdt);
 const formAddValid = new FormValidator(config, formElementAdd);
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 
 //Функция для открытия Popup окон
