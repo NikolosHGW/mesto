@@ -3,21 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
 <body class="body">
   <div class="page">
     <header class="header page__header">
       <a class="header__link" target="_blank" href="#">
-        <img class="header__logo" src="./images/Vector.svg" alt="логотип Место Россия">
+        <img class="header__logo" src="<%=require('./images/Vector.svg')%>" alt="логотип Место Россия">
       </a>
     </header>
 
     <main class="content">
       <section class="profile">
         <div class="profile__container">
-          <img class="profile__avatar" src="./images/image.jpg" alt="Аватар">
+          <img class="profile__avatar" src="<%=require('./images/image.jpg')%>" alt="Аватар">
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__job">Исследователь океана</p>
@@ -90,9 +89,5 @@
       <button class="popup__close-icon" type="button" aria-label="close"></button>
     </div>
   </div>
-
-  <script type="module" src="./pages/index.js"></script>
-  <script type="module" src="./components/Card.js"></script>
-  <script type="module" src="./components/FormValidator.js"></script>
 </body>
 </html>
