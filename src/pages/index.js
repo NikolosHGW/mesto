@@ -6,13 +6,15 @@ import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import FormValidator from "../components/FormValidator.js";
 import {
-  body, popups, popupEdt, popupAdd, popupImg, buttonEdt, buttonAdd,
+  body, popups, popupEdt, popupImg, buttonEdt, buttonAdd,
   formElementEdt, formElementAdd, nameInput, jobInput, cardNameInput,
   imgLinkInput, profName, profJob, bigImg, captionBigImg, elementsContainer, config,
   initialCards
 } from '../utils/constants.js';
 
 
+const formEdtValid = new FormValidator(config, formElementEdt);
+const formAddValid = new FormValidator(config, formElementAdd);
 const elementsSection = new Section( { items: initialCards, renderer: item => {
   const card = new Card(item, '.elements__template', (link, nameCard) => {
     const popupImage = new PopupWithImage('.popup_img', body, { link: link, nameCard: nameCard });
@@ -29,14 +31,32 @@ const popupEdit = new PopupWithForm('.popup_edd', body, item => {
   popupEdit.close();
 });
 
+const popupAdd = new PopupWithForm('.popup_add', body, item => {
+  const card = new Card(item, '.elements__template', (link, nameCard) => {
+    const popupImage = new PopupWithImage('.popup_img', body, { link, nameCard });
+    popupImage.setEventListeners();
+    popupImage.open(bigImg, captionBigImg);
+  });
+  elementsSection.addItem(card.generateCard());
+  popupAdd.close();
+});
+
 
 popupEdit.setEventListeners();
+popupAdd.setEventListeners();
 buttonEdt.addEventListener('click', () => {
   popupEdit.open();
   nameInput.value = userInfo.getUserInfo().name;
   jobInput.value = userInfo.getUserInfo().job;
-})
+  formEdtValid.resetValidation();
+});
+buttonAdd.addEventListener('click', () => {
+  formAddValid.resetValidation();
+  popupAdd.open();
+});
 elementsSection.renderItems();
+formEdtValid.enableValidation();
+formAddValid.enableValidation();
 
 
 
