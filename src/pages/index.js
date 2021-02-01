@@ -10,7 +10,8 @@ import {
   formElementEdt, formElementAdd, nameInput, jobInput, cardNameInput,
   imgLinkInput, profName, profJob, bigImg, captionBigImg, elementsContainer, config,
   initialCards
-} from "../utils/constants.js"
+} from '../utils/constants.js';
+
 
 const elementsSection = new Section( { items: initialCards, renderer: item => {
   const card = new Card(item, '.elements__template', (link, nameCard) => {
@@ -21,6 +22,20 @@ const elementsSection = new Section( { items: initialCards, renderer: item => {
   elementsSection.addItem(card.generateCard());
 }}, '.elements' );
 
+const userInfo = new UserInfo( { name: '.profile__name', job: '.profile__job' } );
+
+const popupEdit = new PopupWithForm('.popup_edd', body, item => {
+  userInfo.setUserInfo(item);
+  popupEdit.close();
+});
+
+
+popupEdit.setEventListeners();
+buttonEdt.addEventListener('click', () => {
+  popupEdit.open();
+  nameInput.value = userInfo.getUserInfo().name;
+  jobInput.value = userInfo.getUserInfo().job;
+})
 elementsSection.renderItems();
 
 
