@@ -6,6 +6,8 @@ Project was built through webpack. Functional code was refactored in OOP code.
 ### Technologies
 * JavaScript
 * Webpack
+* Babel
+* PostCSS
 * HTML
 * CSS
 * Figma
