@@ -8,18 +8,18 @@ import FormValidator from "../components/FormValidator.js";
 import {
   buttonEdt, buttonAdd,
   formElementEdt, formElementAdd, nameInput, jobInput,
-  bigImg, captionBigImg, config, initialCards
+  config, initialCards
 } from '../utils/constants.js';
 
 
 const formEdtValid = new FormValidator(config, formElementEdt);
 const formAddValid = new FormValidator(config, formElementAdd);
 
+const popupImage = new PopupWithImage('.popup_img');
+
 const elementsSection = new Section( { items: initialCards, renderer: item => {
   const card = new Card(item, '.elements__template', (link, nameCard) => {
-    const popupImage = new PopupWithImage('.popup_img', { link: link, nameCard: nameCard });
-    popupImage.setEventListeners();
-    popupImage.open(bigImg, captionBigImg);
+    popupImage.open(link, nameCard);
   });
   elementsSection.addItem(card.generateCard());
 }}, '.elements' );
@@ -33,9 +33,7 @@ const popupEdit = new PopupWithForm('.popup_edd', item => {
 
 const popupAdd = new PopupWithForm('.popup_add', item => {
   const card = new Card(item, '.elements__template', (link, nameCard) => {
-    const popupImage = new PopupWithImage('.popup_img', { link, nameCard });
-    popupImage.setEventListeners();
-    popupImage.open(bigImg, captionBigImg);
+    popupImage.open(link, nameCard);
   });
   elementsSection.addItem(card.generateCard());
   popupAdd.close();
@@ -52,6 +50,7 @@ buttonAdd.addEventListener('click', () => {
   formAddValid.resetValidation();
   popupAdd.open();
 });
+popupImage.setEventListeners();
 popupEdit.setEventListeners();
 popupAdd.setEventListeners();
 elementsSection.renderItems();
