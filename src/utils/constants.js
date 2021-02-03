@@ -1,4 +1,3 @@
-export const body = document.querySelector(".body");
 export const popupEdt = document.querySelector(".popup_edd");
 export const popupAdd = document.querySelector(".popup_add");
 export const buttonEdt = document.querySelector(".profile__edit-button");
