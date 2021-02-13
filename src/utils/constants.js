@@ -2,6 +2,7 @@ export const popupEdt = document.querySelector('.popup_edd');
 export const popupAdd = document.querySelector('.popup_add');
 export const buttonEdt = document.querySelector('.profile__edit-button');
 export const buttonAdd = document.querySelector('.profile__add-button');
+export const avatar = document.querySelector('.profile__avatar');
 export const formElementEdt = popupEdt.querySelector('.popup__form');
 export const formElementAdd = popupAdd.querySelector('.popup__form');
 export const nameInput = popupEdt.querySelector('.popup__input_el_name');
@@ -40,3 +41,10 @@ export const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+export const options = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-20',
+  headers: {
+    authorization: '767d748b-8638-4c15-8660-c2781c344fe7',
+    'Content-Type': 'application/json',
+  }
+}

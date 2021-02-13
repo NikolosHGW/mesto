@@ -4,16 +4,19 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
-import FormValidator from "../components/FormValidator.js";
+import FormValidator from '../components/FormValidator.js';
+import Api from '../components/Api.js';
 import {
-  buttonEdt, buttonAdd,
+  buttonEdt, buttonAdd, options,
   formElementEdt, formElementAdd, nameInput, jobInput,
-  config, initialCards
+  config, initialCards, avatar
 } from '../utils/constants.js';
 
 
 const formEdtValid = new FormValidator(config, formElementEdt);
 const formAddValid = new FormValidator(config, formElementAdd);
+
+const api = new Api(options);
 
 const popupImage = new PopupWithImage('.popup_img');
 
@@ -56,3 +59,9 @@ popupAdd.setEventListeners();
 elementsSection.renderItems();
 formEdtValid.enableValidation();
 formAddValid.enableValidation();
+api.getInfoUser()
+  .then(info => {
+    userInfo.setUserInfo({name: info.name, job: info.about});
+    avatar.src = info.avatar;
+  })
+  .catch(err => {console.log(err)});
