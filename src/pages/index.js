@@ -9,7 +9,7 @@ import Api from '../components/Api.js';
 import {
   buttonEdt, buttonAdd, options,
   formElementEdt, formElementAdd, nameInput, jobInput,
-  config, initialCards, avatar
+  config, avatar
 } from '../utils/constants.js';
 
 
@@ -20,12 +20,7 @@ const api = new Api(options);
 
 const popupImage = new PopupWithImage('.popup_img');
 
-const elementsSection = new Section( { items: initialCards, renderer: item => {
-  const card = new Card(item, '.elements__template', (link, nameCard) => {
-    popupImage.open(link, nameCard);
-  });
-  elementsSection.addItem(card.generateCard());
-}}, '.elements' );
+const elementsSection = new Section( {}, '.elements' );
 
 const userInfo = new UserInfo( { name: '.profile__name', job: '.profile__job' } );
 
@@ -56,7 +51,6 @@ buttonAdd.addEventListener('click', () => {
 popupImage.setEventListeners();
 popupEdit.setEventListeners();
 popupAdd.setEventListeners();
-elementsSection.renderItems();
 formEdtValid.enableValidation();
 formAddValid.enableValidation();
 api.getInfoUser()
@@ -64,4 +58,14 @@ api.getInfoUser()
     userInfo.setUserInfo({name: info.name, job: info.about});
     avatar.src = info.avatar;
   })
-  .catch(err => {console.log(err)});
+  .catch(err => console.log(err));
+api.getInitialCard()
+  .then(items => {
+    items.forEach(item => {
+      const card = new Card(item, '.elements__template', (link, nameCard) => {
+        popupImage.open(link, nameCard);
+      });
+      elementsSection.addItem(card.generateCard());
+    });
+  })
+  .catch(err => console.log(err));
