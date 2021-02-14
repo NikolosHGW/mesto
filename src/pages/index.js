@@ -32,11 +32,15 @@ const popupEdit = new PopupWithForm('.popup_edd', item => {
 });
 
 const popupAdd = new PopupWithForm('.popup_add', item => {
-  const card = new Card(item, '.elements__template', (link, nameCard) => {
-    popupImage.open(link, nameCard);
-  });
-  elementsSection.addItem(card.generateCard());
-  popupAdd.close();
+  api.createCard(item)
+    .then(res => {
+      const card = new Card(res, '.elements__template', (link, nameCard) => {
+        popupImage.open(link, nameCard);
+      });
+      elementsSection.addItem(card.generateCard());
+      popupAdd.close();
+    })
+    .catch(err => console.log(err));
 });
 
 
