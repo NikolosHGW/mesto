@@ -2,6 +2,7 @@ export default class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
+    this._likes = data.likes.length
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -18,6 +19,7 @@ export default class Card {
     this._buttonLikeElement = this._element.querySelector(".element__like-button");
     this._buttonDelElement = this._element.querySelector(".element__del-button");
     this._buttonImgElement = this._element.querySelector(".element__img-button");
+    this._likesElement = this._element.querySelector(".element__count");
   }
 
   _toggleButtonActive(evt) {
@@ -42,6 +44,7 @@ export default class Card {
     this._imgElement.src = this._link;
     this._imgElement.alt = "Загруженная картинка: " + this._name;
     this._headingElement.textContent = this._name;
+    this._likesElement.textContent = this._likes;
 
   	return this._element;
   }
