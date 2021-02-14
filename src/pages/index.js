@@ -26,6 +26,8 @@ const userInfo = new UserInfo( { name: '.profile__name', job: '.profile__job' } 
 
 const popupEdit = new PopupWithForm('.popup_edd', item => {
   userInfo.setUserInfo(item);
+  api.setInfoUser(userInfo.getUserInfo())
+    .catch(err => console.log(`Ошибка: ${err}`));
   popupEdit.close();
 });
 

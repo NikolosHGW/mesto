@@ -15,6 +15,22 @@ export default class Api {
       });
   }
 
+  setInfoUser({ name, job }){
+    return fetch(`${this.options.baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this.options.headers,
+      body: JSON.stringify({
+        name,
+        about: job
+      })
+    })
+      .then(res => {
+        if (!res.ok) {
+          return Promise.reject(res.status);
+        }
+      })
+  }
+
   getInitialCard() {
     return fetch(`${this.options.baseUrl}/cards`, {
       headers: this.options.headers,
