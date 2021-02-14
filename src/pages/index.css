@@ -23,8 +23,10 @@
 @import url("../blocks/element/__del-button/element__del-button.css");
 @import url("../blocks/element/__info/element__info.css");
 @import url("../blocks/element/__heading/element__heading.css");
+@import url("../blocks/element/__group/element__group.css");
 @import url("../blocks/element/__like-button/element__like-button.css");
 @import url("../blocks/element/__like-button/_active/element__like-button_active.css");
+@import url("../blocks/element/__count/element__count.css");
 @import url("../blocks/footer/footer.css");
 @import url("../blocks/footer/__copy/footer__copy.css");
 @import url("../blocks/popup/popup.css");

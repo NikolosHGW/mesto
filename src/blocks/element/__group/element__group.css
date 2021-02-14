@@ -1,0 +1,4 @@
+.element__group {
+  display: flex;
+  flex-direction: column;
+}
