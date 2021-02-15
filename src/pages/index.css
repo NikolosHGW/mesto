@@ -21,6 +21,7 @@
 @import url("../blocks/element/__img-button/element__img-button.css");
 @import url("../blocks/element/__img/element__img.css");
 @import url("../blocks/element/__del-button/element__del-button.css");
+@import url("../blocks/element/__del-button/_visible/element__del-button_visible.css");
 @import url("../blocks/element/__info/element__info.css");
 @import url("../blocks/element/__heading/element__heading.css");
 @import url("../blocks/element/__group/element__group.css");

@@ -13,6 +13,9 @@ import {
 } from '../utils/constants.js';
 
 
+let userStorage = null;
+
+
 const formEdtValid = new FormValidator(config, formElementEdt);
 const formAddValid = new FormValidator(config, formElementAdd);
 
@@ -41,7 +44,8 @@ const popupAdd = new PopupWithForm('.popup_add', item => {
         handleCardClick: (link, nameCard) => {
           popupImage.open(link, nameCard);
         },
-        popupDelete
+        popupDelete,
+        userStorage
       }, '.elements__template');
       elementsSection.addItem(card.generateCard());
       popupAdd.close();
@@ -68,8 +72,9 @@ formEdtValid.enableValidation();
 formAddValid.enableValidation();
 api.getInfoUser()
   .then(info => {
-    userInfo.setUserInfo({name: info.name, job: info.about});
-    avatar.src = info.avatar;
+    userStorage = Object.assign({}, info);
+    userInfo.setUserInfo({name: userStorage.name, job: userStorage.about});
+    avatar.src = userStorage.avatar;
   })
   .catch(err => console.log(err));
 api.getInitialCard()
@@ -80,7 +85,8 @@ api.getInitialCard()
         handleCardClick: (link, nameCard) => {
           popupImage.open(link, nameCard);
         },
-        popupDelete
+        popupDelete,
+        userStorage
       }, '.elements__template');
       elementsSection.addItem(card.generateCard());
     });
