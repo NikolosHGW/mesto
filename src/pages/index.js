@@ -34,9 +34,12 @@ const popupEdit = new PopupWithForm('.popup_edd', item => {
 const popupAdd = new PopupWithForm('.popup_add', item => {
   api.createCard(item)
     .then(res => {
-      const card = new Card(res, '.elements__template', (link, nameCard) => {
-        popupImage.open(link, nameCard);
-      });
+      const card = new Card({
+        data: res,
+        handleCardClick: (link, nameCard) => {
+          popupImage.open(link, nameCard);
+        }
+      }, '.elements__template');
       elementsSection.addItem(card.generateCard());
       popupAdd.close();
     })
@@ -68,9 +71,12 @@ api.getInfoUser()
 api.getInitialCard()
   .then(items => {
     items.forEach(item => {
-      const card = new Card(item, '.elements__template', (link, nameCard) => {
-        popupImage.open(link, nameCard);
-      });
+      const card = new Card({
+        data: item,
+        handleCardClick: (link, nameCard) => {
+          popupImage.open(link, nameCard);
+        }
+      }, '.elements__template');
       elementsSection.addItem(card.generateCard());
     });
   })
