@@ -1,9 +1,10 @@
 export default class Card {
-  constructor({ data, handleCardClick }, cardSelector) {
+  constructor({ data, handleCardClick, popupDelete }, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes.length
     this._handleCardClick = handleCardClick;
+    this._popupDelete = popupDelete;
     this._cardSelector = cardSelector;
   }
 
@@ -32,7 +33,10 @@ export default class Card {
 
   _setEventListeners(){
     this._buttonLikeElement.addEventListener('click', evt => {this._toggleButtonActive(evt)});
-    this._buttonDelElement.addEventListener('click', evt => {this._deleteCard(evt)});
+    this._buttonDelElement.addEventListener('click', evt => {
+      this._popupDelete.setSubmitListener(this._deleteCard, evt);
+      this._popupDelete.open();
+    });
     this._buttonImgElement.addEventListener('click', () => {this._handleCardClick(this._link, this._name)});
   }
 

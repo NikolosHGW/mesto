@@ -20,6 +20,8 @@ const api = new Api(options);
 
 const popupImage = new PopupWithImage('.popup_img');
 
+const popupDelete = new PopupWithForm('.popup_del', undefined);
+
 const elementsSection = new Section( {}, '.elements' );
 
 const userInfo = new UserInfo( { name: '.profile__name', job: '.profile__job' } );
@@ -38,7 +40,8 @@ const popupAdd = new PopupWithForm('.popup_add', item => {
         data: res,
         handleCardClick: (link, nameCard) => {
           popupImage.open(link, nameCard);
-        }
+        },
+        popupDelete
       }, '.elements__template');
       elementsSection.addItem(card.generateCard());
       popupAdd.close();
@@ -60,6 +63,7 @@ buttonAdd.addEventListener('click', () => {
 popupImage.setEventListeners();
 popupEdit.setEventListeners();
 popupAdd.setEventListeners();
+popupDelete.setEventListeners();
 formEdtValid.enableValidation();
 formAddValid.enableValidation();
 api.getInfoUser()
@@ -75,7 +79,8 @@ api.getInitialCard()
         data: item,
         handleCardClick: (link, nameCard) => {
           popupImage.open(link, nameCard);
-        }
+        },
+        popupDelete
       }, '.elements__template');
       elementsSection.addItem(card.generateCard());
     });
