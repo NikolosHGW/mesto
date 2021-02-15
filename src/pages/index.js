@@ -45,7 +45,8 @@ const popupAdd = new PopupWithForm('.popup_add', item => {
           popupImage.open(link, nameCard);
         },
         popupDelete,
-        userStorage
+        userStorage,
+        api
       }, '.elements__template');
       elementsSection.addItem(card.generateCard());
       popupAdd.close();
@@ -86,7 +87,8 @@ api.getInitialCard()
           popupImage.open(link, nameCard);
         },
         popupDelete,
-        userStorage
+        userStorage,
+        api
       }, '.elements__template');
       elementsSection.addItem(card.generateCard());
     });

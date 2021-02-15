@@ -1,13 +1,15 @@
 export default class Card {
-  constructor({ data, handleCardClick, popupDelete, userStorage }, cardSelector) {
+  constructor({ data, handleCardClick, popupDelete, userStorage, api }, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes.length;
     this._ownerCardID = data.owner._id;
+    this._cardID = data._id;
     this._handleCardClick = handleCardClick;
     this._popupDelete = popupDelete;
-    this._cardSelector = cardSelector;
     this._userID = userStorage._id;
+    this._api = api;
+    this._cardSelector = cardSelector;
   }
 
   _getTemplate(){
@@ -29,7 +31,9 @@ export default class Card {
   }
 
   _deleteCard(evt) {
-    evt.target.closest('.element').remove();
+    this._api.deleteCard(this._cardID)
+      .then(() => {evt.target.closest('.element').remove()})
+      .catch(err => console.log(err));
   }
 
   _setEventListeners(){
@@ -42,7 +46,7 @@ export default class Card {
       this._buttonDelElement = this._element.querySelector('.element__del-button');
       this._buttonDelElement.classList.add('element__del-button_visible');
       this._buttonDelElement.addEventListener('click', evt => {
-        this._popupDelete.setSubmitListener(this._deleteCard, evt);
+        this._popupDelete.setSubmitListener(this._deleteCard.bind(this), evt);
         this._popupDelete.open();
       });
     }
