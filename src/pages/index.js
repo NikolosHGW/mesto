@@ -44,7 +44,10 @@ const popupAdd = new PopupWithForm('.popup_add', item => {
         handleCardClick: (link, nameCard) => {
           popupImage.open(link, nameCard);
         },
-        popupDelete,
+        handleCardDelete: (func, subEvt) => {
+          popupDelete.setSubmitListener(func, subEvt);
+          popupDelete.open();
+        },
         userStorage,
         api
       }, '.elements__template');
@@ -86,7 +89,10 @@ api.getInitialCard()
         handleCardClick: (link, nameCard) => {
           popupImage.open(link, nameCard);
         },
-        popupDelete,
+        handleCardDelete: (func, subEvt) => {
+          popupDelete.setSubmitListener(func, subEvt);
+          popupDelete.open();
+        },
         userStorage,
         api
       }, '.elements__template');
