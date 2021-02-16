@@ -49,9 +49,27 @@ const popupAdd = new PopupWithForm('.popup_add', item => {
         handleCardClick: (link, nameCard) => {
           popupImage.open(link, nameCard);
         },
-        handleCardDelete: (func, subEvt) => {
-          popupDelete.setSubmitDeleteListener(res._id, func, subEvt);
+        handleCardDelete: (func, clickEvt) => {
+          popupDelete.setSubmitDeleteListener(res._id, func, clickEvt);
           popupDelete.open();
+        },
+        handleLikes: (toggleFunc, setLikeFunc, clickEvt) => {
+          if (clickEvt.target.classList.contains('element__like-button_active')) {
+            api.deleteLike(res._id)
+              .then(res => {
+                toggleFunc(clickEvt);
+                setLikeFunc(res.likes.length);
+              })
+              .catch(err => console.log(err));
+          }
+          else {
+            api.putLike(res._id)
+              .then(res => {
+                toggleFunc(clickEvt);
+                setLikeFunc(res.likes.length);
+              })
+              .catch(err => console.log(err));
+          }
         },
         userStorage
       }, '.elements__template');
@@ -75,6 +93,7 @@ buttonAdd.addEventListener('click', () => {
 popupImage.setEventListeners();
 popupEdit.setEventListeners();
 popupAdd.setEventListeners();
+popupDelete.setEventListeners();
 formEdtValid.enableValidation();
 formAddValid.enableValidation();
 api.getInfoUser()
@@ -92,9 +111,27 @@ api.getInitialCard()
         handleCardClick: (link, nameCard) => {
           popupImage.open(link, nameCard);
         },
-        handleCardDelete: (func, subEvt) => {
-          popupDelete.setSubmitDeleteListener(item._id, func, subEvt);
+        handleCardDelete: (func, clickEvt) => {
+          popupDelete.setSubmitDeleteListener(item._id, func, clickEvt);
           popupDelete.open();
+        },
+        handleLikes: (toggleFunc, setLikeFunc, clickEvt) => {
+          if (clickEvt.target.classList.contains('element__like-button_active')) {
+            api.deleteLike(item._id)
+              .then(res => {
+                toggleFunc(clickEvt);
+                setLikeFunc(res.likes.length);
+              })
+              .catch(err => console.log(err));
+          }
+          else {
+            api.putLike(item._id)
+              .then(res => {
+                toggleFunc(clickEvt);
+                setLikeFunc(res.likes.length);
+              })
+              .catch(err => console.log(err));
+          }
         },
         userStorage
       }, '.elements__template');

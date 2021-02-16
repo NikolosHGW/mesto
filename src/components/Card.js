@@ -1,11 +1,12 @@
 export default class Card {
-  constructor({ data, handleCardClick, handleCardDelete, userStorage }, cardSelector) {
+  constructor({ data, handleCardClick, handleCardDelete, handleLikes, userStorage }, cardSelector) {
     this._name = data.name;
     this._link = data.link;
-    this._likes = data.likes.length;
+    this._likes = data.likes;
     this._ownerCardID = data.owner._id;
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
+    this._handleLikes = handleLikes;
     this._userID = userStorage._id;
     this._cardSelector = cardSelector;
   }
@@ -28,12 +29,18 @@ export default class Card {
     evt.target.classList.toggle('element__like-button_active');
   }
 
+  _setLikes(count) {
+    this._likesElement.textContent = count;
+  }
+
   _deleteCard(evt) {
     evt.target.closest('.element').remove();
   }
 
   _setEventListeners(){
-    this._buttonLikeElement.addEventListener('click', evt => {this._toggleButtonActive(evt)});
+    this._buttonLikeElement.addEventListener('click', evt => {
+      this._handleLikes(this._toggleButtonActive, this._setLikes.bind(this), evt);
+    });
     this._buttonImgElement.addEventListener('click', () => {this._handleCardClick(this._link, this._name)});
   }
 
@@ -52,11 +59,16 @@ export default class Card {
     this._initVariables();
     this._setEventListeners();
     this._setDeleteCard();
+    this._setLikes(this._likes.length);
 
     this._imgElement.src = this._link;
     this._imgElement.alt = 'Загруженная картинка: ' + this._name;
     this._headingElement.textContent = this._name;
-    this._likesElement.textContent = this._likes;
+    this._likes.forEach(obj => {
+      if (obj['_id'] === this._userID) {
+        this._buttonLikeElement.classList.add('element__like-button_active');
+      }
+    })
 
   	return this._element;
   }
