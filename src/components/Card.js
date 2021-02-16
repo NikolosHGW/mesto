@@ -1,14 +1,12 @@
 export default class Card {
-  constructor({ data, handleCardClick, handleCardDelete, userStorage, api }, cardSelector) {
+  constructor({ data, handleCardClick, handleCardDelete, userStorage }, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes.length;
     this._ownerCardID = data.owner._id;
-    this._cardID = data._id;
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
     this._userID = userStorage._id;
-    this._api = api;
     this._cardSelector = cardSelector;
   }
 
@@ -31,9 +29,7 @@ export default class Card {
   }
 
   _deleteCard(evt) {
-    this._api.deleteCard(this._cardID)
-      .then(() => {evt.target.closest('.element').remove()})
-      .catch(err => console.log(err));
+    evt.target.closest('.element').remove();
   }
 
   _setEventListeners(){

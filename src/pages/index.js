@@ -23,7 +23,12 @@ const api = new Api(options);
 
 const popupImage = new PopupWithImage('.popup_img');
 
-const popupDelete = new PopupWithForm('.popup_del', undefined);
+const popupDelete = new PopupWithForm('.popup_del', (id, func, subEvt) => {
+  api.deleteCard(id)
+    .then(() => {func(subEvt)})
+    .catch(err => console.log(err));
+  popupDelete.close();
+});
 
 const elementsSection = new Section( {}, '.elements' );
 
@@ -45,11 +50,10 @@ const popupAdd = new PopupWithForm('.popup_add', item => {
           popupImage.open(link, nameCard);
         },
         handleCardDelete: (func, subEvt) => {
-          popupDelete.setSubmitListener(func, subEvt);
+          popupDelete.setSubmitDeleteListener(res._id, func, subEvt);
           popupDelete.open();
         },
-        userStorage,
-        api
+        userStorage
       }, '.elements__template');
       elementsSection.addItem(card.generateCard());
       popupAdd.close();
@@ -71,7 +75,6 @@ buttonAdd.addEventListener('click', () => {
 popupImage.setEventListeners();
 popupEdit.setEventListeners();
 popupAdd.setEventListeners();
-popupDelete.setEventListeners();
 formEdtValid.enableValidation();
 formAddValid.enableValidation();
 api.getInfoUser()
@@ -90,11 +93,10 @@ api.getInitialCard()
           popupImage.open(link, nameCard);
         },
         handleCardDelete: (func, subEvt) => {
-          popupDelete.setSubmitListener(func, subEvt);
+          popupDelete.setSubmitDeleteListener(item._id, func, subEvt);
           popupDelete.open();
         },
-        userStorage,
-        api
+        userStorage
       }, '.elements__template');
       elementsSection.addItem(card.generateCard());
     });

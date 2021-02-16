@@ -16,12 +16,10 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    if (this._form.name !== 'popupDelForm') {
-      this._form.addEventListener('submit', evt => {
-        evt.preventDefault();
-        this._formSubmitHandler(this._getInputValues());
-      });
-    }
+    this._form.addEventListener('submit', evt => {
+      evt.preventDefault();
+      this._formSubmitHandler(this._getInputValues());
+    });
   }
 
   close() {
@@ -29,11 +27,10 @@ export default class PopupWithForm extends Popup {
     this._form.reset();
   }
 
-  setSubmitListener(func, event) {
+  setSubmitDeleteListener(id, func, subEvt) {
     this._form.addEventListener('submit', evt => {
       evt.preventDefault();
-      func(event);
-      this.close();
+      this._formSubmitHandler(id, func, subEvt);
     });
   }
 }
