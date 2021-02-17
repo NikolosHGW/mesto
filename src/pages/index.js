@@ -56,47 +56,52 @@ const popupAdd = new PopupWithForm('.popup_add', item => {
   popupAdd.loadText();
   api.createCard(item)
     .then(res => {
-      const card = new Card({
-        data: res,
-        handleCardClick: (link, nameCard) => {
-          popupImage.open(link, nameCard);
-        },
-        handleCardDelete: (func, clickEvt) => {
-          popupDelete.open(() => {
-            api.deleteCard(res._id)
-              .then(() => {
-                func(clickEvt);
-                popupDelete.close();
-              })
-              .catch(err => console.log(err));
-          });
-        },
-        handleLikes: (toggleFunc, setLikeFunc, clickEvt) => {
-          if (clickEvt.target.classList.contains('element__like-button_active')) {
-            api.deleteLike(res._id)
-              .then(res => {
-                toggleFunc(clickEvt);
-                setLikeFunc(res.likes.length);
-              })
-              .catch(err => console.log(err));
-          }
-          else {
-            api.putLike(res._id)
-              .then(res => {
-                toggleFunc(clickEvt);
-                setLikeFunc(res.likes.length);
-              })
-              .catch(err => console.log(err));
-          }
-        },
-        userStorage
-      }, '.elements__template');
-      elementsSection.addItem(card.generateCard());
+      elementsSection.addItem(createCard(res).generateCard());
       popupAdd.close();
       popupAdd.loadText();
     })
     .catch(err => console.log(err));
 });
+
+
+function createCard(res) {
+  const card = new Card({
+    data: res,
+    handleCardClick: (link, nameCard) => {
+      popupImage.open(link, nameCard);
+    },
+    handleCardDelete: (func, clickEvt) => {
+      popupDelete.open(() => {
+        api.deleteCard(res._id)
+          .then(() => {
+            func(clickEvt);
+            popupDelete.close();
+          })
+          .catch(err => console.log(err));
+      });
+    },
+    handleLikes: (toggleFunc, setLikeFunc, clickEvt) => {
+      if (clickEvt.target.classList.contains('element__like-button_active')) {
+        api.deleteLike(res._id)
+          .then(res => {
+            toggleFunc(clickEvt);
+            setLikeFunc(res.likes.length);
+          })
+          .catch(err => console.log(err));
+      }
+      else {
+        api.putLike(res._id)
+          .then(res => {
+            toggleFunc(clickEvt);
+            setLikeFunc(res.likes.length);
+          })
+          .catch(err => console.log(err));
+      }
+    },
+    userStorage
+  }, '.elements__template');
+  return card;
+}
 
 
 buttonEdt.addEventListener('click', () => {
@@ -126,42 +131,7 @@ api.getInfoUser()
 api.getInitialCard()
   .then(items => {
     items.forEach(item => {
-      const card = new Card({
-        data: item,
-        handleCardClick: (link, nameCard) => {
-          popupImage.open(link, nameCard);
-        },
-        handleCardDelete: (func, clickEvt) => {
-          popupDelete.open(() => {
-            api.deleteCard(item._id)
-              .then(() => {
-                func(clickEvt);
-                popupDelete.close();
-              })
-              .catch(err => console.log(err));
-          });
-        },
-        handleLikes: (toggleFunc, setLikeFunc, clickEvt) => {
-          if (clickEvt.target.classList.contains('element__like-button_active')) {
-            api.deleteLike(item._id)
-              .then(res => {
-                toggleFunc(clickEvt);
-                setLikeFunc(res.likes.length);
-              })
-              .catch(err => console.log(err));
-          }
-          else {
-            api.putLike(item._id)
-              .then(res => {
-                toggleFunc(clickEvt);
-                setLikeFunc(res.likes.length);
-              })
-              .catch(err => console.log(err));
-          }
-        },
-        userStorage
-      }, '.elements__template');
-      elementsSection.addItem(card.generateCard());
+      elementsSection.addItem(createCard(item).generateCard());
     });
   })
   .catch(err => console.log(err));
