@@ -1,0 +1,20 @@
+.profile__avatar-cover {
+  position: relative;
+  margin-right: 30px;
+  width: 120px;
+  height: 120px;
+}
+
+.profile__avatar-cover:hover .profile__avatar-button {
+  opacity: 1;
+}
+
+.profile__avatar-cover:hover .profile__avatar {
+  opacity: .2;
+}
+
+@media screen and (max-width: 880px) {
+  .profile__avatar-cover {
+    margin: 0 0 26px;
+  }
+}
