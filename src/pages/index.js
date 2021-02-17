@@ -44,8 +44,8 @@ const userInfo = new UserInfo( { name: '.profile__name', job: '.profile__job' } 
 const popupEdit = new PopupWithForm('.popup_edd', item => {
   popupEdit.loadText();
   api.setInfoUser(item.name, item.job)
-    .then(() => {
-      userInfo.setUserInfo(item);
+    .then(res => {
+      userInfo.setUserInfo({ name: res.name, job: res.about });
       popupEdit.close();
       popupEdit.loadText();
     })
