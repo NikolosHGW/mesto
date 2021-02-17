@@ -10,7 +10,7 @@ import Api from '../components/Api.js';
 import {
   buttonEdt, buttonAdd, options,
   formElementEdt, formElementAdd, nameInput, jobInput,
-  config, avatar
+  config, avatar, buttonAvatar
 } from '../utils/constants.js';
 
 
@@ -25,6 +25,15 @@ const api = new Api(options);
 const popupImage = new PopupWithImage('.popup_img');
 
 const popupDelete = new PopupWithSubmit('.popup_del', { });
+
+const popupAvatar = new PopupWithForm('.popup_refresh', obj => {
+  api.changeAvatar(obj.link)
+    .then(res => {
+      avatar.src = res.avatar;
+      popupAvatar.close();
+    })
+    .catch(err => console.log(err));
+});
 
 const elementsSection = new Section( {}, '.elements' );
 
@@ -92,9 +101,11 @@ buttonAdd.addEventListener('click', () => {
   formAddValid.resetValidation();
   popupAdd.open();
 });
+buttonAvatar.addEventListener('click', () => popupAvatar.open());
 popupImage.setEventListeners();
 popupEdit.setEventListeners();
 popupAdd.setEventListeners();
+popupAvatar.setEventListeners();
 popupDelete.setEventListeners();
 formEdtValid.enableValidation();
 formAddValid.enableValidation();
