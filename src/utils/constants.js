@@ -3,7 +3,6 @@ export const popupAdd = document.querySelector('.popup_add');
 export const buttonEdt = document.querySelector('.profile__edit-button');
 export const buttonAdd = document.querySelector('.profile__add-button');
 export const buttonAvatar = document.querySelector('.profile__avatar-button');
-export const avatar = document.querySelector('.profile__avatar');
 export const formElementEdt = popupEdt.querySelector('.popup__form');
 export const formElementAdd = popupAdd.querySelector('.popup__form');
 export const nameInput = popupEdt.querySelector('.popup__input_el_name');

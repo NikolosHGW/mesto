@@ -10,7 +10,7 @@ import Api from '../components/Api.js';
 import {
   buttonEdt, buttonAdd, options,
   formElementEdt, formElementAdd, nameInput, jobInput,
-  config, avatar, buttonAvatar
+  config, buttonAvatar
 } from '../utils/constants.js';
 
 
@@ -26,26 +26,26 @@ const popupImage = new PopupWithImage('.popup_img');
 
 const popupDelete = new PopupWithSubmit('.popup_del', { });
 
+const elementsSection = new Section( {}, '.elements' );
+
+const userInfo = new UserInfo( { name: '.profile__name', job: '.profile__job', avatar: '.profile__avatar' } );
+
 const popupAvatar = new PopupWithForm('.popup_refresh', obj => {
   popupAvatar.loadText();
   api.changeAvatar(obj.link)
     .then(res => {
       popupAvatar.close();
-      avatar.src = res.avatar;
+      userInfo.setUserInfo({ name: res.name, job: res.about, avatar: res.avatar })
       popupAvatar.loadText();
     })
     .catch(err => console.log(err));
 });
 
-const elementsSection = new Section( {}, '.elements' );
-
-const userInfo = new UserInfo( { name: '.profile__name', job: '.profile__job' } );
-
 const popupEdit = new PopupWithForm('.popup_edd', item => {
   popupEdit.loadText();
   api.setInfoUser(item.name, item.job)
     .then(res => {
-      userInfo.setUserInfo({ name: res.name, job: res.about });
+      userInfo.setUserInfo({ name: res.name, job: res.about, avatar: res.avatar });
       popupEdit.close();
       popupEdit.loadText();
     })
@@ -120,8 +120,7 @@ formAddValid.enableValidation();
 api.getInfoUser()
   .then(info => {
     userStorage = Object.assign({}, info);
-    userInfo.setUserInfo({name: userStorage.name, job: userStorage.about});
-    avatar.src = userStorage.avatar;
+    userInfo.setUserInfo({ name: userStorage.name, job: userStorage.about, avatar: userStorage.avatar });
   })
   .catch(err => console.log(err));
 api.getInitialCard()
