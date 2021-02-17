@@ -27,10 +27,12 @@ const popupImage = new PopupWithImage('.popup_img');
 const popupDelete = new PopupWithSubmit('.popup_del', { });
 
 const popupAvatar = new PopupWithForm('.popup_refresh', obj => {
+  popupAvatar.loadText();
   api.changeAvatar(obj.link)
     .then(res => {
-      avatar.src = res.avatar;
       popupAvatar.close();
+      avatar.src = res.avatar;
+      popupAvatar.loadText();
     })
     .catch(err => console.log(err));
 });
@@ -40,13 +42,18 @@ const elementsSection = new Section( {}, '.elements' );
 const userInfo = new UserInfo( { name: '.profile__name', job: '.profile__job' } );
 
 const popupEdit = new PopupWithForm('.popup_edd', item => {
-  userInfo.setUserInfo(item);
-  api.setInfoUser(userInfo.getUserInfo())
+  popupEdit.loadText();
+  api.setInfoUser(item.name, item.job)
+    .then(() => {
+      userInfo.setUserInfo(item);
+      popupEdit.close();
+      popupEdit.loadText();
+    })
     .catch(err => console.log(`Ошибка: ${err}`));
-  popupEdit.close();
 });
 
 const popupAdd = new PopupWithForm('.popup_add', item => {
+  popupAdd.loadText();
   api.createCard(item)
     .then(res => {
       const card = new Card({
@@ -86,6 +93,7 @@ const popupAdd = new PopupWithForm('.popup_add', item => {
       }, '.elements__template');
       elementsSection.addItem(card.generateCard());
       popupAdd.close();
+      popupAdd.loadText();
     })
     .catch(err => console.log(err));
 });

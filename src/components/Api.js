@@ -15,7 +15,7 @@ export default class Api {
       });
   }
 
-  setInfoUser({ name, job }){
+  setInfoUser(name, job){
     return fetch(`${this.options.baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this.options.headers,
