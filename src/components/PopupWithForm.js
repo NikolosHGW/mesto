@@ -16,23 +16,14 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    if (this._form.name !== 'popupDelForm') {
-      this._form.addEventListener('submit', evt => {
-        evt.preventDefault();
-        this._formSubmitHandler(this._getInputValues());
-      });
-    }
+    this._form.addEventListener('submit', evt => {
+      evt.preventDefault();
+      this._formSubmitHandler(this._getInputValues());
+    });
   }
 
   close() {
     super.close();
     this._form.reset();
-  }
-
-  setSubmitDeleteListener(id, func, clickEvt) {
-    this._form.addEventListener('submit', evt => {
-      evt.preventDefault();
-      this._formSubmitHandler(id, func, clickEvt);
-    });
   }
 }
