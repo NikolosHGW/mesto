@@ -4,7 +4,7 @@ Developed an interactive single-page website where we can add photos, delete the
 Project was built through webpack. Functional code was refactored in OOP code.
 
 ### Technologies
-* JavaScript
+* Async JavaScript
 * Webpack
 * Babel
 * PostCSS
